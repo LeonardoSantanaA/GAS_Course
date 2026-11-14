@@ -1,0 +1,21 @@
+﻿// Copyright Lekaum
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "AuraCharacterBase.h"
+#include "AuraEnemy.generated.h"
+
+UCLASS()
+class AURA_API AAuraEnemy : public AAuraCharacterBase
+{
+	GENERATED_BODY()
+
+public:
+	// Sets default values for this character's properties
+	AAuraEnemy();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+};
