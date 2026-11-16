@@ -9,6 +9,7 @@
 struct FInputActionValue;
 class UInputMappingContext;
 class UInputAction;
+class IHighlightInterface;
 
 UCLASS()
 class AURA_API AAuraPlayerController : public APlayerController
@@ -17,6 +18,7 @@ class AURA_API AAuraPlayerController : public APlayerController
 
 public:
 	AAuraPlayerController();
+	virtual void PlayerTick(float DeltaTime) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -30,4 +32,8 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	void Move(const FInputActionValue& InputActionValue);
+
+	void CursorTrace();
+	TScriptInterface<IHighlightInterface> LastHighlightActor;
+	TScriptInterface<IHighlightInterface> ThisHighlightActor;
 };
