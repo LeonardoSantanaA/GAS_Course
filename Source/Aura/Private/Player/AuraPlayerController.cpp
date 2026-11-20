@@ -19,11 +19,14 @@ void AAuraPlayerController::BeginPlay()
 	// Crashes the game if AuraContext doesnt valid
 	check(AuraContext);
 
+	// don't assert this pointer;  GetLocalPlayer() is null for remote players in multiplayer
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<
 		UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(AuraContext, 0);
+	}
 
-	Subsystem->AddMappingContext(AuraContext, 0);
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
