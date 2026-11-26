@@ -3,7 +3,7 @@
 
 #include "Character/AuraCharacter.h"
 
-#include "AbilitySystemComponent.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -78,6 +78,12 @@ void AAuraCharacter::InitAbilityActorInfo()
 	// set AbilitySystemComponent and AttributeSet pointers
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
 	AttributeSet = AuraPlayerState->GetAttributeSet();
+
+	// call AbilitySystemComponent set
+	if (UAuraAbilitySystemComponent* AuraASC = Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent))
+	{
+		AuraASC->AbilityActorInfoSet();
+	}
 
 	// initialize HUD
 	// don't assert: on clients, GetController() is only valid for the locally controlled character. other AuraCharacters don't have Controller on client

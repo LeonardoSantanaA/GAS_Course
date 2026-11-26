@@ -30,7 +30,16 @@ void AAuraEnemy::BeginPlay()
 
 	// init Ability actor info for enemies
 	check(AbilitySystemComponent);
+}
+
+void AAuraEnemy::InitAbilityActorInfo()
+{
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+	if (UAuraAbilitySystemComponent* AuraASC = Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent))
+	{
+		AuraASC->AbilityActorInfoSet();
+	}
 }
 
 

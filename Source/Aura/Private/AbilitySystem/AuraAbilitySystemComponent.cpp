@@ -3,34 +3,23 @@
 
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 
-
-// Sets default values for this component's properties
 UAuraAbilitySystemComponent::UAuraAbilitySystemComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
-
-// Called when the game starts
-void UAuraAbilitySystemComponent::BeginPlay()
+void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 {
-	Super::BeginPlay();
-
-	// ...
-	
+	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &ThisClass::EffectApplied);
 }
 
-
-// Called every frame
-void UAuraAbilitySystemComponent::TickComponent(float DeltaTime, ELevelTick TickType,
-                                                FActorComponentTickFunction* ThisTickFunction)
+void UAuraAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec,
+                                                FActiveGameplayEffectHandle ActiveEffectHandle)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	FGameplayTagContainer TagContainer;
+	EffectSpec.GetAllAssetTags(TagContainer);
+	for (const FGameplayTag& Tag : TagContainer)
+	{
+		//TODO: Broadcast the tag to the Widget Controller
+	}
 }
-

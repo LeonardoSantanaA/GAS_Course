@@ -29,5 +29,5 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* Camera;
 
-	void InitAbilityActorInfo();
+	virtual void InitAbilityActorInfo() override;
 };
